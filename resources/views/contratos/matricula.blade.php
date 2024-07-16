@@ -32,7 +32,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Contrato de Matrícula</h1>
+        <h1>Contrato de Matrícula para cerca</h1>
         
         <div class="info">
             <p><strong>Nombre del Alumno:</strong> {{ $matricula->nombre }} {{ $matricula->apellido }}</p>
