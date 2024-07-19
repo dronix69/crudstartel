@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-07-2024 a las 17:57:21
+-- Tiempo de generación: 20-07-2024 a las 01:49:35
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -45,13 +45,6 @@ CREATE TABLE `certificados` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `certificados`
---
-
-INSERT INTO `certificados` (`id`, `rut`, `matricula_id`, `nombre`, `apellido`, `curso_id`, `codigo_curso`, `curso`, `tipo`, `fecha_ini`, `fecha_fin`, `certificado`, `fecha_otorgado`, `venta_id`, `created_at`, `updated_at`) VALUES
-(7, '21345678-7', 4, 'RAMO', 'VIDAL', 2, 'SIT-2230', 'A-2', 'elearning', '2024-07-16', '2024-07-31', '2435', '2024-07-16', 13, '2024-07-16 22:10:58', '2024-07-16 22:10:58');
 
 -- --------------------------------------------------------
 
@@ -541,6 +534,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 CREATE TABLE `ventas` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `matricula_id` bigint(20) UNSIGNED NOT NULL,
+  `rut` varchar(50) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellido` varchar(255) NOT NULL,
   `boleta` int(11) NOT NULL,
@@ -558,9 +552,8 @@ CREATE TABLE `ventas` (
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `matricula_id`, `nombre`, `apellido`, `boleta`, `forma_pago`, `fecha_pago`, `cuota`, `valor`, `total`, `cancelado`, `created_at`, `updated_at`) VALUES
-(12, 4, 'RAMO', 'VIDAL', 23455, 'efectivo', '2024-07-14', 2, 200000.00, 100000.00, 0, '2024-07-15 01:16:32', '2024-07-16 00:48:58'),
-(13, 4, 'RAMO', 'VIDAL', 24567, 'efectivo', '2024-07-15', 1, 100000.00, 100000.00, 1, '2024-07-16 01:14:46', '2024-07-16 01:14:46');
+INSERT INTO `ventas` (`id`, `matricula_id`, `rut`, `nombre`, `apellido`, `boleta`, `forma_pago`, `fecha_pago`, `cuota`, `valor`, `total`, `cancelado`, `created_at`, `updated_at`) VALUES
+(14, 4, '21345678-7', 'RAMO', 'VIDAL', 14245, 'efectivo', '2024-07-19', 2, 200000.00, 100000.00, 0, '2024-07-19 16:17:11', '2024-07-19 16:17:11');
 
 --
 -- Índices para tablas volcadas
@@ -790,7 +783,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
