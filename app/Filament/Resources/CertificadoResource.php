@@ -52,6 +52,7 @@ class CertificadoResource extends Resource
                                         if ($state) {
                                             $venta = Venta::find($state);
                                             if ($venta) {
+                                                $set('rut', $venta->rut);
                                                 $set('nombre', $venta->nombre);
                                                 $set('apellido', $venta->apellido);
                                             }
@@ -71,28 +72,13 @@ class CertificadoResource extends Resource
                                             };
                                         },
                                     ]),
-
+                                Forms\Components\TextInput::make('rut')
+                                    ->dehydrated(true),
                                 Forms\Components\TextInput::make('nombre')
                                     ->dehydrated(true),
                                 Forms\Components\TextInput::make('apellido')
                                     ->dehydrated(true),
-                                Forms\Components\Select::make('rut')
-                                    ->label('RUT')
-                                    ->options(Matricula::pluck('rut', 'rut'))
-                                    ->searchable()
-                                    ->preload()
-                                    ->required()
-                                    ->live()
-                                    ->afterStateUpdated(function ($state, Forms\Set $set) {
-                                        if ($state) {
-                                            $matricula = Matricula::where('rut', $state)->first();
-                                            if ($matricula) {
-                                                $set('matricula_id', $matricula->id);
-                                            }
-                                        }
-                                    }),
-                                Forms\Components\Hidden::make('matricula_id'),  //Es un campo oculto
-
+                                
                                 Forms\Components\Select::make('codigo_curso')
                                     ->label('Código Curso')
                                     ->options(Curso::pluck('codigo', 'codigo'))
@@ -207,7 +193,7 @@ class CertificadoResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);

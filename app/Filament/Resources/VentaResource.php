@@ -50,20 +50,24 @@ class VentaResource extends Resource
                     ->schema([
                         Forms\Components\Section::make('Datos')
                             ->schema([
-                                Forms\Components\Select::make('matricula_id')
-                                    ->label('Rut de la Matricula')
-                                    ->options(Matricula::pluck('rut', 'id'))
+                                Forms\Components\Select::make('rut')
+                                    ->label('RUT')
+                                    ->options(Matricula::pluck('rut', 'rut'))
                                     ->searchable()
+                                    ->preload()
+                                    ->required()
                                     ->live()
-                                    ->afterStateUpdated(function ($state, Forms\Set $set) {  //Esta funcion me coloca el nombre y el apellido cuando seleciono el rut.
+                                    ->afterStateUpdated(function ($state, Forms\Set $set) {
                                         if ($state) {
-                                            $matricula = Matricula::find($state);
+                                            $matricula = Matricula::where('rut', $state)->first();
                                             if ($matricula) {
+                                                $set('matricula_id', $matricula->id);
                                                 $set('nombre', $matricula->nombre);
                                                 $set('apellido', $matricula->apellido);
                                             }
                                         }
                                     }),
+                                Forms\Components\Hidden::make('matricula_id'),  //Es un campo oculto
                                 Forms\Components\TextInput::make('nombre')
                                     ->dehydrated(true),
                                 Forms\Components\TextInput::make('apellido')
