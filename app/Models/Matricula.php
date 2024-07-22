@@ -22,12 +22,9 @@ class Matricula extends Model
         return $this->belongsTo(Curso::class, 'id');
     }
 
-    public function certificado()
-    {
-        return $this->hasOne(Certificado::class, 'id');
-    }
+    
 
-    //Genera un codigo al campo codigo
+    //Genera un codigo aleatorio al campo codigo
     protected static function boot()
     {
         parent::boot();

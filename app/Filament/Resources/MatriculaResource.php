@@ -87,9 +87,19 @@ class MatriculaResource extends Resource
                                 Forms\Components\TextInput::make('comuna')
                                     ->required()
                                     ->maxValue(50),
+                                Forms\Components\Select::make('nivel')
+                                    ->label('Nivel de Escolaridad')
+                                    ->required()
+                                    ->options([
+                                        'Basica Incompleta' => 'Basica Incompleta',
+                                        'Basica Completa' => 'Basica Completa',
+                                        'Media Incompleta' => 'Media Incompleta',
+                                        'Media Completa' => 'Media Completa',
+                                        'Tecnico' => 'Tecnico',
+                                        'Universitario' => 'Universitario',
+                                    ]),    
                                 Forms\Components\Select::make('cursos_id')
                                     ->relationship('curso', 'codigo')
-                                    ->columnSpan('full')
                                     ->required()
                                     ->searchable()
                                     ->preload(),
@@ -159,8 +169,11 @@ class MatriculaResource extends Resource
                 Tables\Columns\TextColumn::make('comuna')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('nivel')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('curso.codigo')
-                    ->label('Codigo')
+                    ->label('Curso')
                     ->sortable()
                     ->searchable(),
                 

@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Support\Facades\FilamentIcon;
 use Filament\Tables\Filters\SelectFilter;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Filament\Tables\Actions\Action;
 
 class CertificadoResource extends Resource
 {
@@ -134,8 +136,7 @@ class CertificadoResource extends Resource
                 Tables\Columns\TextColumn::make('venta.boleta')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('matricula.rut')
-                    ->label('Rut')
+                Tables\Columns\TextColumn::make('rut')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nombre')
@@ -191,6 +192,17 @@ class CertificadoResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+
+                // Boton para imprimir contrato del alumno
+                Action::make('imprimir_certificado')
+                    ->label('Imprimir Certificado')
+                    ->icon('heroicon-o-printer')
+                    ->action(function (Certificado $record) {
+                        $pdf = Pdf::loadView('certificados.certificado', ['certificado' => $record]);
+                        return response()->streamDownload(function () use ($pdf) {
+                            echo $pdf->output();
+                        }, 'certificado_' . $record->rut . '.pdf');
+                    })
             ])
             ->bulkActions([
                     Tables\Actions\BulkActionGroup::make([
