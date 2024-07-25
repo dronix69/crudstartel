@@ -29,7 +29,7 @@ class InstructivoResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('titulo')
                     ->required()
-                    ->maxValue(50),
+                    ->maxValue(250),
                 Forms\Components\Select::make('categoria')
                     ->required()
                     ->options([

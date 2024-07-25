@@ -37,6 +37,7 @@ class MatriculaResource extends Resource
     {
         return static::getModel()::count();
     }
+    
 
     public static function form(Form $form): Form
     {
@@ -97,12 +98,22 @@ class MatriculaResource extends Resource
                                         'Media Completa' => 'Media Completa',
                                         'Tecnico' => 'Tecnico',
                                         'Universitario' => 'Universitario',
+                                    ]),
+                                Forms\Components\Select::make('licencia_actual')
+                                    ->required()
+                                    ->options([
+                                        'B' => 'B',
+                                        'A2' => 'A2',
+                                        'A3' => 'A3',
+                                        'A4' => 'A4',
+                                        'A5' => 'A5',
                                     ]),    
                                 Forms\Components\Select::make('cursos_id')
                                     ->relationship('curso', 'codigo')
                                     ->required()
                                     ->searchable()
-                                    ->preload(),
+                                    ->preload()
+                                    ->columnSpan('full'),
                             ])->columns('2')
                     ]),
 
@@ -126,6 +137,8 @@ class MatriculaResource extends Resource
                                     ->columnSpan('full')
                             ])->columns('2')
                     ])
+
+                    
 
             ]);
     }
@@ -172,10 +185,13 @@ class MatriculaResource extends Resource
                 Tables\Columns\TextColumn::make('nivel')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('licencia_actual')
+                    ->sortable()
+                    ->searchable(),    
                 Tables\Columns\TextColumn::make('curso.codigo')
                     ->label('Curso')
                     ->sortable()
-                    ->searchable(),
+                    ->toggleable(),
                 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -187,11 +203,7 @@ class MatriculaResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //SelectFilter::make('curso')
-                // ->relationship('curso', 'codigo')
-                // ->searchable()
-                //  ->preload()
-
+                
                 Filter::make('fecha_matricula')
                     ->form([
                         DatePicker::make('fecha_inicio'),
@@ -218,7 +230,8 @@ class MatriculaResource extends Resource
                     ->label('Imprimir Contrato')
                     ->icon('heroicon-o-printer')
                     ->action(function (Matricula $record) {
-                        $pdf = Pdf::loadView('contratos.matricula', ['matricula' => $record]);
+                        $matricula = $record->load('venta');
+                        $pdf = Pdf::loadView('contratos.matricula', ['matricula' => $matricula]);
                         return response()->streamDownload(function () use ($pdf) {
                             echo $pdf->output();
                         }, 'contrato_' . $record->rut . '.pdf');

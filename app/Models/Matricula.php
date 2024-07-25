@@ -14,12 +14,12 @@ class Matricula extends Model
 
     public function venta()
     {
-        return $this->hasOne(Venta::class, 'id');
+        return $this->hasOne(Venta::class, 'matricula_id');
     }
 
     public function curso()
     {
-        return $this->belongsTo(Curso::class, 'id');
+        return $this->belongsTo(Curso::class, 'cursos_id');
     }
 
     

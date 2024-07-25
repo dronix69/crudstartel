@@ -13,7 +13,7 @@ class Venta extends Model
 
     public function matricula()
     {
-        return $this->belongsTo(Matricula::class, 'matricula_id');
+        return $this->belongsTo(Matricula::class);
     }
 
     public function certificado()

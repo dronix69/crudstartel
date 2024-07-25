@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('comuna');
             $table->string('codigo');
             $table->string('nivel');
+            $table->string('licencia_actual');
 
 
             $table->foreignId('cursos_id')
