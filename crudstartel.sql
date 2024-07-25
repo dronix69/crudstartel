@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-07-2024 a las 01:49:35
+-- Tiempo de generación: 25-07-2024 a las 23:09:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `certificados` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `rut` varchar(50) NOT NULL,
-  `matricula_id` bigint(20) UNSIGNED NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellido` varchar(255) NOT NULL,
   `curso_id` bigint(20) UNSIGNED NOT NULL,
@@ -45,6 +44,13 @@ CREATE TABLE `certificados` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `certificados`
+--
+
+INSERT INTO `certificados` (`id`, `rut`, `nombre`, `apellido`, `curso_id`, `codigo_curso`, `curso`, `tipo`, `fecha_ini`, `fecha_fin`, `certificado`, `fecha_otorgado`, `venta_id`, `created_at`, `updated_at`) VALUES
+(10, '17178250-3', 'DANIEL', 'FERRADA', 1, 'SIT-1002', 'A-2', 'presencial', '2024-07-01', '2024-07-31', '2435', '2024-07-25', 17, '2024-07-25 21:04:12', '2024-07-25 21:04:12');
 
 -- --------------------------------------------------------
 
@@ -172,7 +178,7 @@ CREATE TABLE `instructivos` (
 --
 
 INSERT INTO `instructivos` (`id`, `titulo`, `categoria`, `contenido`, `created_at`, `updated_at`) VALUES
-(1, 'Ingresar al Aula Virtual', 'administrativo', '<h2><strong>Como poder ingresar al aula virtual</strong></h2><p><br></p><p><br></p>', '2024-07-10 23:19:18', '2024-07-10 23:19:18');
+(2, 'Solicitud de credenciales para el ingreso al Aula Virtual.', 'administrativo', '<p>Cuando el Cliente o el alumno haya realizado todo el proceso de compra a través de la página web, el administrativo debe revisar los datos en la plataforma en woocomerce, para comprobar la cancelación de curso de su elección.</p><p>Luego de revisar y confirmar el pago de la transferencia bancaria, el administrativo solicitará, las credenciales para que el alumno pueda ingresar a la plataforma virtual, se podrá solicitar por medio del <strong>whatsapp</strong> o via correo electronica a <strong>informatica@cerca.cl</strong>.</p><p>El informático creará la credenciales del alumno dentro del día, el sistema le enviara un correo al alumno con el nombre de usuario y la clave para que ingrese al aula virtual.&nbsp;</p><p>Si el alumno tuviera dificultad para ingresar, puede ponerse en contacto con un administrativo, el puede orientar a alumno que pueda ver los videos el cual muestra la forma de poder ingresar al aula virtual. dentro de la página web en el menú <strong>Aula virtual</strong>, hay un link con el nombre de <a href=\"https://cerca.cl/mesa-de-ayuda/\"><strong>Mesa de Ayuda</strong></a>, ahí encontrar un video de ayuda que explica como ingresar a la plataforma virtual. Si aún así no logra ingresar el alumno, el administrativo o el alumno debe envíe un correo a <strong>informatica@cerca.cl</strong>.&nbsp;</p>', '2024-07-23 21:32:24', '2024-07-23 21:32:24');
 
 -- --------------------------------------------------------
 
@@ -221,7 +227,9 @@ CREATE TABLE `matriculas` (
   `fecha_nacimiento` date NOT NULL,
   `direccion` varchar(255) NOT NULL,
   `comuna` varchar(255) NOT NULL,
+  `nivel` varchar(50) NOT NULL,
   `codigo` varchar(50) NOT NULL,
+  `licencia_actual` varchar(200) NOT NULL,
   `cursos_id` bigint(20) UNSIGNED NOT NULL,
   `image_url` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -232,8 +240,9 @@ CREATE TABLE `matriculas` (
 -- Volcado de datos para la tabla `matriculas`
 --
 
-INSERT INTO `matriculas` (`id`, `nombre`, `apellido`, `rut`, `correo`, `telefono`, `edad`, `fecha_matricula`, `fecha_nacimiento`, `direccion`, `comuna`, `codigo`, `cursos_id`, `image_url`, `created_at`, `updated_at`) VALUES
-(4, 'RAMO', 'VIDAL', '21345678-7', 'vidal@gmail.com', 966554422, 23, '2024-07-14', '2022-06-08', 'PINOS 222', 'Tolten', 'SAT-20240701', 1, 'image-filament/logoRM.png', '2024-07-15 00:52:29', '2024-07-15 00:52:29');
+INSERT INTO `matriculas` (`id`, `nombre`, `apellido`, `rut`, `correo`, `telefono`, `edad`, `fecha_matricula`, `fecha_nacimiento`, `direccion`, `comuna`, `nivel`, `codigo`, `licencia_actual`, `cursos_id`, `image_url`, `created_at`, `updated_at`) VALUES
+(1, 'DANIEL', 'FERRADA', '17178250-3', 'larajuan@gmail.com', 988776655, 30, '2024-07-24', '2024-07-11', 'ANDRES BELLO 1180', 'TEMUCO', 'Tecnico', 'SAT-20240701', 'A2', 1, 'image-filament/user-21.png', '2024-07-25 01:28:38', '2024-07-25 01:28:38'),
+(4, 'RAMO', 'VIDAL', '21345678-7', 'vidal@gmail.com', 977665544, 23, '2024-07-25', '1986-07-10', 'PINOS 222', 'Tolten', 'Media Completa', 'SAT-20240702', 'B', 2, 'image-filament/logo01.jpeg', '2024-07-25 20:18:01', '2024-07-25 20:18:01');
 
 -- --------------------------------------------------------
 
@@ -553,7 +562,7 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `matricula_id`, `rut`, `nombre`, `apellido`, `boleta`, `forma_pago`, `fecha_pago`, `cuota`, `valor`, `total`, `cancelado`, `created_at`, `updated_at`) VALUES
-(14, 4, '21345678-7', 'RAMO', 'VIDAL', 14245, 'efectivo', '2024-07-19', 2, 200000.00, 100000.00, 0, '2024-07-19 16:17:11', '2024-07-19 16:17:11');
+(17, 1, '17178250-3', 'DANIEL', 'FERRADA', 23455, 'efectivo', '2024-07-25', 1, 200000.00, 200000.00, 1, '2024-07-25 21:03:42', '2024-07-25 21:03:42');
 
 --
 -- Índices para tablas volcadas
@@ -564,7 +573,6 @@ INSERT INTO `ventas` (`id`, `matricula_id`, `rut`, `nombre`, `apellido`, `boleta
 --
 ALTER TABLE `certificados`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `certificados_matricula_id_foreign` (`matricula_id`),
   ADD KEY `certificados_curso_id_foreign` (`curso_id`),
   ADD KEY `certificados_venta_id_foreign` (`venta_id`);
 
@@ -705,7 +713,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `certificados`
 --
 ALTER TABLE `certificados`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `cursos`
@@ -741,7 +749,7 @@ ALTER TABLE `imports`
 -- AUTO_INCREMENT de la tabla `instructivos`
 --
 ALTER TABLE `instructivos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `matriculas`
@@ -783,7 +791,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Restricciones para tablas volcadas
@@ -794,7 +802,6 @@ ALTER TABLE `ventas`
 --
 ALTER TABLE `certificados`
   ADD CONSTRAINT `certificados_curso_id_foreign` FOREIGN KEY (`curso_id`) REFERENCES `cursos` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `certificados_matricula_id_foreign` FOREIGN KEY (`matricula_id`) REFERENCES `matriculas` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `certificados_venta_id_foreign` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE;
 
 --
