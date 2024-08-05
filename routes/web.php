@@ -18,3 +18,4 @@ Route::get('/', function () {
     return redirect('/admin/login');
 });
 
+// routes/web.php
