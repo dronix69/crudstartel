@@ -187,7 +187,14 @@ class MatriculaResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('licencia_actual')
                     ->sortable()
-                    ->searchable(),    
+                    ->searchable()
+                    ->color(fn (string $state): string => match ($state) {
+                        'B' => 'primary',
+                        'A2' => 'warning',
+                        'A3' => 'success',
+                        'A4' => 'danger',
+                        'A5' => 'info',
+                    }),    
                 Tables\Columns\TextColumn::make('curso.codigo')
                     ->label('Curso')
                     ->sortable()

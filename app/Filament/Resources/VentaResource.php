@@ -176,7 +176,14 @@ class VentaResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('cuota')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->color(fn (string $state): string => match ($state) {
+                        '1' => 'warning',
+                        '2' => 'danger',
+                        '3' => 'success',
+                        '4' => 'primary',
+                        '5' => 'info',
+                    }),
                 Tables\Columns\TextColumn::make('valor')
                     ->label('Valor del Curso')
                     ->sortable()
