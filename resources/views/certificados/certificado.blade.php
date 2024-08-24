@@ -28,106 +28,108 @@
             font-family: Arial, sans-serif;
         }
         #cerca {
-            top: 250px;
-            left: 319px;
+            top: 264px;
+            left: 307px;
             font-size: 24px;
             font-weight: bold;
         }
         #escuela {
-            top: 275px;
-            left: 231px;
-        }
-        #rut {
-            top: 275px;
-            left: 566px;
-        }
-        #belloun {
-            top: 299px;
-            left: 284px;
-        }
-        #tenun {
-            top: 329px;
-            left: 205px;
-        }
-        #novena {
-            top: 329px;
-            left: 584px;
-        }
-        #codun {
-            top: 352px;
-            left: 423px;
-        }
-        #fecun {
-            top: 352px;
-            left: 566px;
-        }
-        #codos {
-            top: 376px;
-            left: 442px;
-        }
-        #fecdo {
-            top: 376px;
-            left: 578px;
-        }
-        #nombre {
-            top: 469px;
+            top: 291px;
             left: 209px;
         }
+        #rut {
+            top: 291px;
+            left: 583px;
+        }
+        #belloun {
+            top: 315px;
+            left: 268px;
+        }
+        #tenun {
+            top: 343px;
+            left: 185px;
+        }
+        #novena {
+            top: 343px;
+            left: 602px;
+        }
+        #codun {
+            top: 374px;
+            left: 421px;
+        }
+        #fecun {
+            top: 374px;
+            left: 583px;
+        }
+        #codos {
+            top: 402px;
+            left: 445px;
+        }
+        #fecdo {
+            top: 402px;
+            left: 591px;
+        }
+        #nombre {
+            top: 512px;
+            left: 181px;
+            font-size: 22px;
+            font-weight: bold;
+        }
         #rutal {
-            top: 498px;
-            left: 178px;
+            top: 539px;
+            left: 146px;
         }
         #curso {
-            top: 526px;
-            left: 596px;
-        }
-        #sit {
-            top: 573px;
-            left: 290px;
-        }
-        #novenan {
-            top: 606px;
-            left: 582px;
-        }
-        #bellom {
-            top: 627px;
-            left: 248px;
-        }
-        #temuco {
-            top: 651px;
-            left: 245px;
-        }
-        #novenatre {
-            top: 651px;
-            left: 582px;
-        }
-        #codigo {
-            top: 675px;
-            left: 241px;
-        }
-        #finicio {
-            top: 675px;
-            left: 511px;
-        }
-        #ftermino {
-            top: 675px;
+            top: 571px;
             left: 618px;
         }
+        #sit {
+            top: 622px;
+            left: 272px;
+        }
+        #novenan {
+            top: 657px;
+            left: 598px;
+        }
+        #bellom {
+            top: 681px;
+            left: 228px;
+        }
+        #temuco {
+            top: 709px;
+            left: 224px;
+        }
+        #novenatre {
+            top: 709px;
+            left: 598px;
+        }
+        #codigo {
+            top: 732px;
+            left: 220px;
+        }
+        #finicio {
+            top: 732px;
+            left: 520px;
+        }
+        #ftermino {
+            top: 732px;
+            left: 634px;
+        }
         #jorge {
-            top: 711px;
-            left: 181px;
+            top: 815px;
+            left: 177px;
         }
         #jorgerut {
-            top: 741px;
-            left: 160px;
+            top: 846px;
+            left: 165px;
         }
         #temucotres {
-            top: 926px;
-            left: 95px;
+            top: 1047px;
+            left: 98px;
         }
         #fnow {
-            top: 926px;
-            left: 196px;
+            top: 1047px;
+            left: 193px;
         }
     </style>
 </head>
