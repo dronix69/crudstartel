@@ -27,7 +27,7 @@ class MatriculaResource extends Resource
 {
     protected static ?string $model = Matricula::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-trophy';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
     protected static ?string $navigationGroup = 'School';
 
