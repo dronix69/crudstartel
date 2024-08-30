@@ -13,9 +13,22 @@ class MatriculaChart extends ChartWidget
     protected static ?int $sort = 4;
     protected static ?string $heading = 'Chart Matriculas';
 
+    public ?string $filter = 'today';
+
+    protected function getFilters(): ?array
+    {
+        return [
+            'today' => 'Today',
+            'week' => 'Last week',
+            'month' => 'Last month',
+            'year' => 'This year',
+        ];
+    }
+
     protected function getData(): array
     {
 
+        $activeFilter = $this->filter;
 
         $data = Trend::model(Matricula::class)
         ->between(

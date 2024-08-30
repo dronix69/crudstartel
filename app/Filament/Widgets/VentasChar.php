@@ -14,8 +14,22 @@ class VentasChar extends ChartWidget
     protected static ?int $sort = 3;
     protected static ?string $heading = 'Chart Ventas';
 
+    public ?string $filter = 'today';
+
+    protected function getFilters(): ?array
+    {
+        return [
+            'today' => 'Today',
+            'week' => 'Last week',
+            'month' => 'Last month',
+            'year' => 'This year',
+        ];
+    }
+
     protected function getData(): array
     {
+
+        $activeFilter = $this->filter;
 
 
         $data = Trend::model(Venta::class)
