@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Filters\Filter;
 
 class EventResource extends Resource
 {
@@ -90,7 +92,22 @@ class EventResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Filter::make('start_at')
+                    ->form([
+                        DatePicker::make('fecha_inicio'),
+                        DatePicker::make('fecha_termino'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['fecha_inicio'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('start_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['fecha_termino'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('start_at', '<=', $date),
+                            );
+                    })
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

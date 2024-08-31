@@ -12,6 +12,7 @@ class MatriculaChart extends ChartWidget
 {
     protected static ?int $sort = 4;
     protected static ?string $heading = 'Chart Matriculas';
+    //protected static string $color = 'info';
 
     public ?string $filter = 'today';
 
