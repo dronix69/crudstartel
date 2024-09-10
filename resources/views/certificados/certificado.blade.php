@@ -28,107 +28,107 @@
             font-family: Arial, sans-serif;
         }
         #cerca {
-            top: 264px;
-            left: 307px;
+            top: 267px;
+            left: 310px;
             font-size: 24px;
             font-weight: bold;
         }
         #escuela {
-            top: 291px;
+            top: 302px;
             left: 209px;
         }
         #rut {
-            top: 291px;
-            left: 583px;
+            top: 302px;
+            left: 605px;
         }
         #belloun {
-            top: 315px;
+            top: 331px;
             left: 268px;
         }
         #tenun {
-            top: 343px;
-            left: 185px;
+            top: 352px;
+            left: 182px;
         }
         #novena {
-            top: 343px;
-            left: 602px;
+            top: 352px;
+            left: 608px;
         }
         #codun {
-            top: 374px;
-            left: 421px;
+            top: 388px;
+            left: 431px;
         }
         #fecun {
-            top: 374px;
-            left: 583px;
+            top: 388px;
+            left: 595px;
         }
         #codos {
-            top: 402px;
-            left: 445px;
+            top: 418px;
+            left: 457px;
         }
         #fecdo {
-            top: 402px;
-            left: 591px;
+            top: 418px;
+            left: 599px;
         }
         #nombre {
-            top: 512px;
+            top: 522px;
             left: 181px;
             font-size: 22px;
             font-weight: bold;
         }
         #rutal {
-            top: 539px;
-            left: 146px;
+            top: 555px;
+            left: 147px;
         }
         #curso {
-            top: 571px;
-            left: 618px;
+            top: 589px;
+            left: 638px;
         }
         #sit {
-            top: 622px;
-            left: 272px;
+            top: 642px;
+            left: 282px;
         }
         #novenan {
-            top: 657px;
-            left: 598px;
+            top: 677px;
+            left: 610px;
         }
         #bellom {
-            top: 681px;
+            top: 701px;
             left: 228px;
         }
         #temuco {
-            top: 709px;
+            top: 729px;
             left: 224px;
         }
         #novenatre {
-            top: 709px;
-            left: 598px;
+            top: 729px;
+            left: 608px;
         }
         #codigo {
-            top: 732px;
+            top: 755px;
             left: 220px;
         }
         #finicio {
-            top: 732px;
-            left: 520px;
+            top: 755px;
+            left: 530px;
         }
         #ftermino {
-            top: 732px;
-            left: 634px;
+            top: 755px;
+            left: 650px;
         }
         #jorge {
-            top: 815px;
+            top: 842px;
             left: 177px;
         }
         #jorgerut {
-            top: 846px;
-            left: 165px;
+            top: 868px;
+            left: 163px;
         }
         #temucotres {
-            top: 1047px;
+            top: 1079px;
             left: 98px;
         }
         #fnow {
-            top: 1047px;
+            top: 1079px;
             left: 193px;
         }
     </style>

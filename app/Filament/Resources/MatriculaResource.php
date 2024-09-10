@@ -148,6 +148,7 @@ class MatriculaResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image_url')
+                    ->label('Imagen')
                     ->square(),
                 Tables\Columns\TextColumn::make('codigo')
                     ->sortable()
