@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\EventExporter;
 use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
@@ -16,6 +17,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Filters\Filter;
 
 class EventResource extends Resource
@@ -115,6 +117,10 @@ class EventResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+
+                // Boton para exportar en excel
+                ExportBulkAction::make()->exporter(EventExporter::class)  
+                
                 ]),
             ]);
     }
