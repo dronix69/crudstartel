@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<html>
+    <header>
+    </header>
+    <body>
+        <h1>
+            Certificado Profesional.
+        </h1>
+    </body>    
+
+</html><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -148,7 +157,7 @@
         <div id="nombre" class="elemento">{{ $certificado->nombre }} {{ $certificado->apellido }}</div>
         <div id="rutal" class="elemento">{{ $certificado->rut }}</div>
         <div id="curso" class="elemento">{{ $certificado->curso }}</div>
-        <div id="sit" class="elemento">Especial con Simulador de Inmersión Total</div>
+        <div id="sit" class="elemento">Curso Profesional</div>
         <div id="novenan" class="elemento">Novena</div>
         <div id="bellom" class="elemento">Andres Bello 1180</div>
         <div id="temuco" class="elemento">Temuco</div>

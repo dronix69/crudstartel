@@ -28,6 +28,8 @@ class EventResource extends Resource
 
     protected static ?string $navigationGroup = 'School';
 
+    protected static ?string $navigationLabel = 'Práticas';
+
     protected static ?int $navigationSort = 4;
 
     public static function getNavigationBadge(): ?string

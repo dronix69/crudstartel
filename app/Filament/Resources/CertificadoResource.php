@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Support\Facades\FilamentIcon;
 use Filament\Tables\Filters\SelectFilter;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\Action;
 
 class CertificadoResource extends Resource
@@ -194,7 +195,7 @@ class CertificadoResource extends Resource
                 Tables\Actions\EditAction::make(),
 
                 // Boton para imprimir contrato del alumno
-                Action::make('imprimir_certificado')
+                /*Action::make('imprimir_certificado')
                     ->label('Imprimir Certificado')
                     ->icon('heroicon-o-printer')
                     ->action(function (Certificado $record) {
@@ -202,7 +203,32 @@ class CertificadoResource extends Resource
                         return response()->streamDownload(function () use ($pdf) {
                             echo $pdf->output();
                         }, 'certificado_' . $record->rut . '.pdf');
-                    })
+                    }) */
+
+
+                     // Boton seleccionar un certificado y poder imprimir un pdf del alumno
+                    Action::make('imprimir_certificado')
+                    ->label('Imprimir Certificado')
+                    ->icon('heroicon-o-printer')
+                    ->form([
+                        Select::make('tipo_certificado')
+                            ->label('Seleciona el Certificado')
+                            ->options([
+                                'certificado' => 'SIT',
+                                'profesional' => 'PROF',
+                            ])
+                            ->required(),
+                    ])
+                    ->action(function (Certificado $record, array $data) {
+                        $tipoCertificado = $data['tipo_certificado'];
+                        $view = $tipoCertificado === 'certificado' ? 'certificado' : 'profesional';
+                        
+                        $pdf = PDF::loadView("certificados.{$view}", ['certificado' => $record]);
+                        return response()->streamDownload(function () use ($pdf) {
+                            echo $pdf->output();
+                        }, "{$tipoCertificado}_certificado.pdf");
+                    }),
+
             ])
             ->bulkActions([
                     Tables\Actions\BulkActionGroup::make([

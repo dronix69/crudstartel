@@ -3,7 +3,7 @@
 <head><meta http-equiv="cache-control" content="no-cache"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="-1">
 <style type="text/css">
 .body{padding-top: 10px; padding-left: 10px; padding-right: 10; padding-bottom: 10px;}
-.lw { font-size: 20px; text-align: center; margin-top: 90px;}
+.lw { font-size: 20px; text-align: center; margin-top: 40px;}
 .la { text-align: center; font-size: 18px; margin-left: 30px; }
 .lb { text-align: right; font-size: 18px; margin-right: 50px; }
 .lc { text-align: justify; font-size: 18px; }
@@ -12,6 +12,14 @@ table, td, th {border-collapse: collapse; border: 2px solid; width: 100%;}
 
 .le {list-style-type: upper-latin;}
 .lf {font-style: normal; font-size: 18px;}
+.logo {
+            width: 90px;
+            height: auto;
+            margin-right: 20px;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
 .modulo {
             width: 100%;
             border-collapse: collapse;
@@ -78,6 +86,7 @@ table, td, th {border-collapse: collapse; border: 2px solid; width: 100%;}
 </head>
 <body class="body">
 <!-- Start your code here -->
+<img src="{{ public_path('images/logo.png') }}" alt="Logo de la Escuela" class="logo">
 
 <p class="lw">Escuela de Conductores CERCA</p>
 <h2 class="la">Control de Capacitación</h2>
@@ -121,13 +130,19 @@ table, td, th {border-collapse: collapse; border: 2px solid; width: 100%;}
   </tr>
   <tr>
     <td>Licencia a que postula</td>
-    <td></td>
+    @if($matricula->curso)
+    <td>{{ $matricula->curso->curso }}</td>
+    @endif
     <td>N° de Curso</td>
-    <td></td>
+    @if($matricula->curso)
+    <td>{{ $matricula->curso->codigo}}</td>
+    @endif
   </tr>
   <tr>
     <td>Jornada de Clases</td>
-    <td></td>
+    @if($matricula->curso)
+    <td>{{ $matricula->curso->tipo }}</td>
+    @endif
     <td>Fecha de inicio y Témino</td>
     <td></td>
   </tr>
@@ -148,7 +163,7 @@ table, td, th {border-collapse: collapse; border: 2px solid; width: 100%;}
     <td>{{ $matricula->venta->valor}}</td>
     <td>{{ $matricula->fecha_nacimiento}}</td>
     <td>{{ $matricula->venta->boleta }}</td>
-    <td></td>
+    <td>{{ $matricula->venta->cancelado }}</td>
   </tr>
   @endif
   <tr>

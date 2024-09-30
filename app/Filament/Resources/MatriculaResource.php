@@ -21,6 +21,7 @@ use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Filters\Filter;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\Action;
 
 class MatriculaResource extends Resource
@@ -37,6 +38,8 @@ class MatriculaResource extends Resource
     {
         return static::getModel()::count();
     }
+
+    
     
 
     public static function form(Form $form): Form
@@ -67,6 +70,7 @@ class MatriculaResource extends Resource
                                         ignoreRecord: true
                                     )
                                     ->required()
+                                    ->prefix('RUT')
                                     ->maxValue(12),
                                 Forms\Components\TextInput::make('correo')
                                     ->prefixIcon('heroicon-m-envelope-open')
@@ -74,11 +78,12 @@ class MatriculaResource extends Resource
                                     ->email()
                                     ->unique(ignoreRecord: true),
                                 Forms\Components\TextInput::make('telefono')
-                                    ->prefixIcon('heroicon-m-device-phone-mobile')
+                                    ->prefix('+56')
                                     ->label('Telefono')
                                     ->tel()
                                     ->required()
-                                    ->maxValue(15),
+                                    ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
+                                    ->maxValue(20),
                                 Forms\Components\TextInput::make('edad')
                                     ->required()
                                     ->maxValue(3),
@@ -107,6 +112,8 @@ class MatriculaResource extends Resource
                                         'A3' => 'A3',
                                         'A4' => 'A4',
                                         'A5' => 'A5',
+                                        'A2-A4' => 'A2-A4',
+                                        'A3-A5' => 'A3-A5',
                                     ]),    
                                 Forms\Components\Select::make('cursos_id')
                                     ->relationship('curso', 'codigo')
@@ -135,6 +142,7 @@ class MatriculaResource extends Resource
                                     ->preserveFilenames()
                                     ->imageEditor()
                                     ->columnSpan('full')
+                                    
                             ])->columns('2')
                     ])
 
@@ -235,7 +243,7 @@ class MatriculaResource extends Resource
                 Tables\Actions\EditAction::make(),
             
                 // Boton para imprimir contrato del alumno
-                Action::make('imprimir_contrato')
+                /*Action::make('imprimir_contrato')
                     ->label('Imprimir Contrato')
                     ->icon('heroicon-o-printer')
                     ->action(function (Matricula $record) {
@@ -244,7 +252,33 @@ class MatriculaResource extends Resource
                         return response()->streamDownload(function () use ($pdf) {
                             echo $pdf->output();
                         }, 'contrato_' . $record->rut . '.pdf');
-                    })
+                    }) */
+                
+                    // Boton seleccionar un contrato y poder imprimir un pdf del alumno
+                    Action::make('imprimir_contrato')
+                    ->label('Imprimir Contrato')
+                    ->icon('heroicon-o-printer')
+                    ->form([
+                        Select::make('tipo_contrato')
+                            ->label('Seleciona el Contrato')
+                            ->options([
+                                'matricula' => 'SIT',
+                                'prof' => 'PROF',
+                            ])
+                            ->required(),
+                    ])
+                    ->action(function (Matricula $record, array $data) {
+                        $tipoContrato = $data['tipo_contrato'];
+                        $view = $tipoContrato === 'matricula' ? 'matricula' : 'prof';
+                        
+                        $pdf = PDF::loadView("contratos.{$view}", ['matricula' => $record]);
+                        return response()->streamDownload(function () use ($pdf) {
+                            echo $pdf->output();
+                        }, "{$tipoContrato}_contrato.pdf");
+                    }),
+
+
+
             ])
             ->headerActions([
                 ExportAction::make()->exporter(MatriculaExporter::class)
@@ -277,6 +311,7 @@ class MatriculaResource extends Resource
             'edit' => Pages\EditMatricula::route('/{record}/edit'),
         ];
     }
+    
 
        
 }
